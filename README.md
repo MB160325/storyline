@@ -21,6 +21,8 @@ This repository includes a Vercel Node.js Function entry point and route rules. 
 4. Generate a secret locally with `node -p "require('node:crypto').randomBytes(48).toString('hex')"`. Add the output in Vercel as `SESSION_SECRET`.
 5. Deploy or redeploy. Give visitors the production URL and the password you chose. Never add the plain password or generated secrets to source files or Git.
 
+Use the current Production domain shown in Vercel after deployment. A deployment-specific `*.vercel.app` URL is an immutable snapshot and will keep showing its original build after later changes.
+
 The Vercel function protects `/api/config` and media routes; direct requests to the source config and asset paths are routed through the same protection. Production setup must use Vercel environment variables because serverless files cannot persist `.env` changes. If you change either secret, redeploy so the new values take effect.
 
 If you prefer code-based configuration, `server.js` has `CODE_PASSWORD_HASH` and `CODE_SESSION_SECRET` constants near the top. Paste the generated hash value (without the `PASSWORD_HASH=` prefix) and a generated session secret there, then deploy. On Vercel, explicitly configured environment variables take precedence; locally the code values take precedence. Do not put the plain password in client-side files such as `script.js`, `index.html`, or `config.js`.
