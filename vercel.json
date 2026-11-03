@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 15,
+      "includeFiles": "{index.html,style.css,script.js,config.js,assets/**}"
+    }
+  },
+  "routes": [
+    { "src": "^/api/(.*)$", "dest": "/api/index.js?path=/api/$1" },
+    { "src": "^/media/image/(.*)$", "dest": "/api/index.js?path=/media/image/$1" },
+    { "src": "^/media/video/(.*)$", "dest": "/api/index.js?path=/media/video/$1" },
+    { "src": "^/media/music/(.*)$", "dest": "/api/index.js?path=/media/music/$1" },
+    { "src": "^/media/(.*)$", "dest": "/api/index.js?path=/media/$1" },
+    { "src": "^/assets/images/(.*)$", "dest": "/api/index.js?path=/media/image/$1" },
+    { "src": "^/assets/videos/(.*)$", "dest": "/api/index.js?path=/media/video/$1" },
+    { "src": "^/assets/music/(.*)$", "dest": "/api/index.js?path=/media/music/$1" },
+    { "src": "^/config\\.js$", "dest": "/api/index.js?path=/blocked-private-file" }
+  ]
+}

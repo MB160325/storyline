@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#edf6fb">
+  <meta name="description" content="عالم صغير يحفظ حكايتنا وذكرياتنا الجميلة.">
+  <title>حكايتنا | عالمٌ لنا وحدنا</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#content">انتقلي إلى الحكاية</a>
+  <div class="ambient" aria-hidden="true"><div class="cloud cloud-one"></div><div class="cloud cloud-two"></div><div class="grain"></div></div>
+  <section class="gate" id="gate" aria-labelledby="gate-title">
+    <div class="gate-sky" aria-hidden="true"><span class="gate-orb"></span><span class="gate-star star-a">✧</span><span class="gate-star star-b">✦</span></div>
+    <form class="gate-card" id="login-form">
+      <span class="eyebrow gate-eyebrow">مساحة صغيرة لنا</span>
+      <div class="gate-emblem" aria-hidden="true"><span>♡</span></div>
+      <h1 id="gate-title">هذا العالم صُنع<br>لشخص واحد فقط</h1>
+      <p id="gate-subtitle">لأن بعض الذكريات أجمل من أن يراها أحد غيرنا.</p>
+      <label class="sr-only" id="password-label" for="password">كلمة المرور الخاصة بنا</label>
+      <div class="password-wrap"><input id="password" name="password" type="password" placeholder="أدخلي كلمة المرور الخاصة بنا..." autocomplete="current-password" required><button class="reveal-password" id="show-password" type="button" aria-label="إظهار كلمة المرور">◉</button></div>
+      <div class="password-wrap confirm-password-wrap" id="confirm-password-wrap" hidden><label class="sr-only" for="confirm-password">أعيدي كتابة كلمة المرور</label><input id="confirm-password" name="confirm-password" type="password" placeholder="أعيدي كتابة كلمة المرور..." autocomplete="new-password"></div>
+      <p class="form-error" id="login-error" role="alert" aria-live="polite"></p>
+      <p class="setup-helper" id="setup-helper" hidden>اختاري كلمة من عشرة أحرف على الأقل، وستُحفظ بأمان على هذا الجهاز.</p>
+      <button class="button button-dark gate-submit" id="login-submit" type="submit"><span>افتحي عالمنا</span><span aria-hidden="true">←</span></button>
+      <span class="gate-footnote">بعض الحكايات أجمل حين تبقى بين قلبين</span>
+    </form>
+    <span class="gate-copyright">عالمٌ صغير، وحكايةٌ لا تشبه غيرها</span>
+  </section>
+
+  <div class="site-shell" id="site-shell" inert>
+    <header class="site-header" id="top">
+      <a href="#top" class="brand" aria-label="حكايتنا، إلى الأعلى"><span class="brand-mark">ح</span><span>حكايتنا<small>مساحة لنا وحدنا</small></span></a>
+      <nav class="main-nav" aria-label="التنقل الرئيسي"><a href="#story">الحكاية</a><a href="#gallery">صورنا</a><a href="#letters">رسائلنا</a><a href="#tomorrow">أحلامنا</a></nav>
+      <button class="icon-button logout-button" id="logout-button" type="button" aria-label="إغلاق عالمنا" title="إغلاق عالمنا"><span>↗</span></button>
+    </header>
+
+    <main id="content" tabindex="-1">
+      <section class="hero" id="hero">
+        <div class="hero-copy reveal">
+          <span class="eyebrow"><i></i> حكايةٌ تنتمي إلينا</span>
+          <h1>حكايتنا...<br><em>أجمل ما حدث لي</em></h1>
+          <p>بين آلاف الوجوه، كانت هناك روح واحدة<br class="desktop-only"> استطاعت أن تجعل العالم أكثر جمالاً.</p>
+          <button class="button button-light" type="button" data-scroll="#story"><span>ابدئي رحلتنا</span><span class="arrow-down" aria-hidden="true">↓</span></button>
+          <div class="hero-note"><span class="note-line"></span><span>وما زالت الحكاية تُكتب</span></div>
+        </div>
+        <div class="hero-art reveal" aria-label="مشهد سماوي هادئ">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="hero-moon"></div><div class="hero-cloud hero-cloud-back"></div><div class="hero-cloud hero-cloud-front"></div>
+          <span class="art-star art-star-one">✧</span><span class="art-star art-star-two">✦</span><span class="art-star art-star-three">✧</span>
+          <div class="hero-art-caption"><span>١٤ مايو ٢٠٢١</span><i></i><span>أول صفحة في الحكاية</span></div>
+        </div>
+        <div class="hero-bottom"><span>رحلةٌ عبر ما جمعنا</span><span class="scroll-mark">↓</span><span>اسحبي برفق</span></div>
+      </section>
+
+      <section class="counter-section" aria-label="الوقت الذي جمعنا"><div class="counter-intro reveal"><span class="eyebrow">منذ أن بدأت حكايتنا</span><h2>وكل يومٍ بعدها<br>كان <em>أقرب إلى القلب</em></h2></div><div class="counter reveal" id="counter" aria-live="off"><div><strong id="days">٠</strong><span>يوماً</span></div><i></i><div><strong id="hours">٠٠</strong><span>ساعة</span></div><i></i><div><strong id="minutes">٠٠</strong><span>دقيقة</span></div><i></i><div><strong id="seconds">٠٠</strong><span>ثانية</span></div></div></section>
+
+      <section class="story-section section-pad" id="story">
+        <div class="section-heading reveal"><span class="eyebrow">خطواتٌ صغيرة، وحكايةٌ كبيرة</span><h2>كل شيءٍ جميل<br><em>بدأ من لحظة</em></h2><p>بعض الأيام تمرّ، وبعضها يبقى هنا… في مكانٍ لا تطاله الأيام.</p></div>
+        <div class="timeline" id="timeline"></div>
+      </section>
+
+      <section class="gallery-section section-pad" id="gallery">
+        <div class="section-heading section-heading-center reveal"><span class="eyebrow">نافذةٌ على أيامنا</span><h2>صورٌ تقول <em>ما لا نقوله</em></h2><p>كل صورة بابٌ صغير إلى لحظةٍ نحبّها.</p></div>
+        <div class="filters reveal" id="gallery-filters" aria-label="تصفية الصور"></div>
+        <div class="masonry" id="gallery-grid"></div>
+      </section>
+
+      <section class="video-section section-pad" id="videos">
+        <div class="video-heading reveal"><div class="section-heading"><span class="eyebrow">صوتٌ وصورة، وشيءٌ منّا</span><h2>لحظاتٌ <em>تتحرك</em></h2><p>بعض الذكريات لا تكتمل إلا حين تعود إلينا بصوتها.</p></div><span class="video-count" id="video-count">٠ مقاطع</span></div>
+        <div class="video-grid" id="video-grid"></div>
+      </section>
+
+      <section class="letters-section section-pad" id="letters">
+        <div class="section-heading reveal"><span class="eyebrow">كلماتٌ احتفظ بها قلبي</span><h2>رسائل من <em>أعماق قلبي</em></h2><p>هناك كلمات لا تستطيع الصور قولها، لذلك كتبتها لكِ.</p></div>
+        <div class="letters-grid" id="letters-grid"></div>
+      </section>
+
+      <section class="promise-section" id="promise">
+        <div class="promise-sky" aria-hidden="true"><span class="promise-star p-star-one">✦</span><span class="promise-star p-star-two">✧</span><span class="promise-star p-star-three">✦</span><span class="promise-glow"></span></div>
+        <div class="promise-content reveal"><span class="eyebrow">ما أريدكِ أن تعرفيه دائماً</span><h2>مهما حدث...<br><em>سأظل بجانبكِ.</em></h2><p id="promise-copy"></p><span class="promise-sign">♡</span></div>
+      </section>
+
+      <section class="dreams-section section-pad" id="tomorrow">
+        <div class="dreams-top"><div class="section-heading reveal"><span class="eyebrow">ما زال أمامنا متّسعٌ للحلم</span><h2>أجمل أيامنا <em>لم تأتِ بعد</em></h2><p>ما زالت هناك أماكن سنزورها، وأحلام سنحققها، وذكريات تنتظر أن نصنعها معاً.</p></div><button class="button button-outline add-dream-button" id="add-dream" type="button"><span>أضيفي حلماً</span><span>＋</span></button></div>
+        <div class="dreams-grid" id="dreams-grid"></div>
+        <button class="surprise-button reveal" id="surprise-button" type="button"><span class="surprise-icon">✧</span><span><strong>فاجئيني بذكرى</strong><small>افتحي صندوقاً صغيراً من أيامنا</small></span><span class="surprise-arrow">←</span></button>
+      </section>
+
+      <section class="closing-section" id="closing">
+        <div class="closing-glow" aria-hidden="true"></div><div class="closing-content reveal"><span class="eyebrow">قبل أن تغادري...</span><h2>كل الطرق الجميلة<br><em>تعيدني إليكِ</em></h2><p>إذا وصلتِ إلى هنا، فتذكري أن كل صورة تحمل لحظة، وكل لحظة تحمل شعوراً، وكل شعور يذكرني بكِ.<br><br>شكراً لأنكِ جزء من حكايتي.<br>وشكراً لكل ذكرى جميلة جعلت لحياتي معنى مختلفاً.<br><br>ومهما حدث... سأظل بجانبكِ.</p><span class="closing-signature">من قلبي إلى قلبكِ، إلى الأبد <i>♡</i></span></div>
+        <footer><span>صُنع بكل الحب، من أجل حكايتنا.</span><span>حكايةٌ لا تشبه غيرها <i>♡</i></span></footer>
+      </section>
+    </main>
+  </div>
+
+  <button class="music-toggle" id="music-toggle" type="button" aria-label="تشغيل لحن حكايتنا" title="لحن حكايتنا" hidden><span class="music-bars"><i></i><i></i><i></i><i></i></span></button>
+  <audio id="background-audio" loop preload="none"></audio>
+  <div class="modal-layer" id="modal-layer" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
