@@ -12,12 +12,13 @@ let lastFocused = null;
 let toastTimer;
 let counterTimer;
 let dreamItems = [];
-let setupMode = false;
+const ACCESS_PASSWORD = '160325@MB';
+const ACCESS_KEY = 'hikayatuna-static-access';
 document.body.classList.add('is-locked');
 
 const arabicNumber = (value) => new Intl.NumberFormat('ar-EG').format(value);
 const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
-const mediaUrl = (file, type = 'image') => `/media/${type}/${encodeURIComponent(file)}`;
+const mediaUrl = (file, type = 'image') => `/assets/${type === 'image' ? 'images' : type === 'video' ? 'videos' : 'music'}/${encodeURIComponent(file)}`;
 
 function showToast(message) {
   toast.textContent = message;
@@ -39,67 +40,12 @@ function unlockWorld(message = '') {
 
 function loadPrivateWorld() {
   if (memories) return;
-  const script = document.createElement('script');
-  script.src = '/api/config';
-  script.onload = () => {
-    memories = window.MEMORIES;
-    if (!memories) return showToast('تعذر فتح الحكاية الآن.');
-    renderWorld();
-  };
-  script.onerror = () => showToast('تعذر فتح الحكاية الآن. حاولي مرة أخرى.');
-  document.head.append(script);
+  memories = window.MEMORIES;
+  if (!memories) return showToast('تعذر فتح الحكاية الآن.');
+  renderWorld();
 }
 
-async function checkExistingSession() {
-  try {
-    const response = await fetch('/api/session', { credentials: 'same-origin', cache: 'no-store' });
-    const result = await response.json();
-    if (result.authenticated) return unlockWorld();
-    const setupResponse = await fetch('/api/setup/status', { credentials: 'same-origin', cache: 'no-store' });
-    const setup = await setupResponse.json();
-    if (!setup.setupRequired) return;
-    if (setup.setupAllowed) enableSetupMode();
-    else {
-      byId('gate-title').innerHTML = 'هذا العالم ينتظر<br>إعداده أولاً';
-      byId('gate-subtitle').textContent = setup.hosted
-        ? 'أكملي إعداد كلمة المرور بإضافة PASSWORD_HASH وSESSION_SECRET في إعدادات Vercel ثم أعيدي النشر.'
-        : 'افتحي هذه الصفحة على الجهاز الذي يستضيف الموقع لإنشاء كلمة مروره.';
-      byId('login-submit').disabled = true;
-      loginError.textContent = '';
-    }
-  } catch {
-    loginError.textContent = 'لا نستطيع الوصول إلى عالمنا الآن.';
-  }
-}
-
-function enableSetupMode() {
-  setupMode = true;
-  byId('gate-title').innerHTML = 'لنبدأ بحماية<br>عالمنا الصغير';
-  byId('gate-subtitle').textContent = 'اختاري كلمة مرور تبقى بيننا، ثم ادخلي إلى حكايتنا.';
-  byId('password-label').textContent = 'اختاري كلمة المرور الخاصة بنا';
-  byId('password').placeholder = 'اختاري كلمة مرور من عشرة أحرف على الأقل...';
-  byId('password').autocomplete = 'new-password';
-  byId('confirm-password-wrap').hidden = false;
-  byId('confirm-password').required = true;
-  byId('setup-helper').hidden = false;
-  byId('login-submit').querySelector('span').textContent = 'احفظي كلمة مرورنا';
-}
-
-function enableLoginMode() {
-  setupMode = false;
-  byId('gate-title').innerHTML = 'هذا العالم صُنع<br>لشخص واحد فقط';
-  byId('gate-subtitle').textContent = 'لأن بعض الذكريات أجمل من أن يراها أحد غيرنا.';
-  byId('password-label').textContent = 'كلمة المرور الخاصة بنا';
-  byId('password').placeholder = 'أدخلي كلمة المرور الخاصة بنا...';
-  byId('password').autocomplete = 'current-password';
-  byId('confirm-password-wrap').hidden = true;
-  byId('confirm-password').required = false;
-  byId('confirm-password').value = '';
-  byId('setup-helper').hidden = true;
-  byId('login-submit').querySelector('span').textContent = 'افتحي عالمنا';
-}
-
-loginForm.addEventListener('submit', async (event) => {
+loginForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const submit = byId('login-submit');
   const password = byId('password');
@@ -107,34 +53,16 @@ loginForm.addEventListener('submit', async (event) => {
   submit.disabled = true;
   label.textContent = 'لحظة من فضلكِ...';
   loginError.textContent = '';
-  try {
-    if (setupMode && password.value !== byId('confirm-password').value) {
-      loginError.textContent = 'كلمتا المرور غير متطابقتين.';
-      byId('confirm-password').focus();
-      return;
-    }
-    const response = await fetch(setupMode ? '/api/setup' : '/api/login', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: password.value, confirmPassword: setupMode ? byId('confirm-password').value : undefined })
-    });
-    const result = await response.json();
-    if (!response.ok) {
-      loginError.textContent = result.error || 'يبدو أن هذا العالم ينتظر كلمة السر الصحيحة.';
-      password.select();
-      return;
-    }
+  if (password.value === ACCESS_PASSWORD) {
+    sessionStorage.setItem(ACCESS_KEY, 'open');
     password.value = '';
-    byId('confirm-password').value = '';
-    if (setupMode) enableLoginMode();
-    unlockWorld(result.message);
-  } catch {
-    loginError.textContent = 'لا نستطيع الوصول إلى عالمنا الآن. حاولي مرة أخرى.';
-  } finally {
-    submit.disabled = false;
-    label.textContent = setupMode ? 'احفظي كلمة مرورنا' : 'افتحي عالمنا';
+    unlockWorld('أهلاً بكِ في أجمل حكاياتنا...');
+  } else {
+    loginError.textContent = 'يبدو أن هذا العالم ينتظر كلمة السر الصحيحة.';
+    password.select();
   }
+  submit.disabled = false;
+  label.textContent = 'افتحي عالمنا';
 });
 
 byId('show-password').addEventListener('click', (event) => {
@@ -144,10 +72,9 @@ byId('show-password').addEventListener('click', (event) => {
   event.currentTarget.setAttribute('aria-label', showing ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور');
 });
 
-byId('logout-button').addEventListener('click', async () => {
-  try { await fetch('/api/logout', { method: 'POST', credentials: 'same-origin' }); } catch { /* the local view still closes */ }
+byId('logout-button').addEventListener('click', () => {
+  sessionStorage.removeItem(ACCESS_KEY);
   memories = null;
-  window.MEMORIES = undefined;
   document.body.classList.remove('is-unlocked');
   document.body.classList.add('is-locked');
   shell.classList.remove('is-ready');
@@ -518,4 +445,4 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-checkExistingSession();
+if (sessionStorage.getItem(ACCESS_KEY) === 'open') unlockWorld();

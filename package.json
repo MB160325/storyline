@@ -1,8 +1,0 @@
-{
-  "name": "hikayatuna-private-memories",
-  "version": "1.0.0",
-  "private": true,
-  "description": "A private Arabic memory garden",
-  "scripts": {"start": "node server.js", "password-hash": "node scripts/create-password-hash.js"},
-  "engines": {"node": ">=20"}
-}

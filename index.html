@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
+  <script src="/config.js" defer></script>
   <script src="/script.js" defer></script>
 </head>
 <body>
@@ -25,9 +26,7 @@
       <p id="gate-subtitle">لأن بعض الذكريات أجمل من أن يراها أحد غيرنا.</p>
       <label class="sr-only" id="password-label" for="password">كلمة المرور الخاصة بنا</label>
       <div class="password-wrap"><input id="password" name="password" type="password" placeholder="أدخلي كلمة المرور الخاصة بنا..." autocomplete="current-password" required><button class="reveal-password" id="show-password" type="button" aria-label="إظهار كلمة المرور">◉</button></div>
-      <div class="password-wrap confirm-password-wrap" id="confirm-password-wrap" hidden><label class="sr-only" for="confirm-password">أعيدي كتابة كلمة المرور</label><input id="confirm-password" name="confirm-password" type="password" placeholder="أعيدي كتابة كلمة المرور..." autocomplete="new-password"></div>
       <p class="form-error" id="login-error" role="alert" aria-live="polite"></p>
-      <p class="setup-helper" id="setup-helper" hidden>اختاري كلمة من عشرة أحرف على الأقل، وستُحفظ بأمان على هذا الجهاز.</p>
       <button class="button button-dark gate-submit" id="login-submit" type="submit"><span>افتحي عالمنا</span><span aria-hidden="true">←</span></button>
       <span class="gate-footnote">بعض الحكايات أجمل حين تبقى بين قلبين</span>
     </form>
