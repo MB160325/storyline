@@ -15,6 +15,7 @@
     { "src": "^/assets/images/(.*)$", "dest": "/api/index.js?path=/media/image/$1" },
     { "src": "^/assets/videos/(.*)$", "dest": "/api/index.js?path=/media/video/$1" },
     { "src": "^/assets/music/(.*)$", "dest": "/api/index.js?path=/media/music/$1" },
-    { "src": "^/config\\.js$", "dest": "/api/index.js?path=/blocked-private-file" }
+    { "src": "^/config\\.js$", "dest": "/api/index.js?path=/blocked-private-file" },
+    { "handle": "filesystem" }
   ]
 }
