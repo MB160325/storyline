@@ -238,6 +238,7 @@ const handler = async (req, res) => {
 
   if ((url.pathname === '/api/config' || url.pathname.startsWith('/media/') || url.pathname.startsWith('/private/')) && !authenticated(req, res)) return;
   if (req.method === 'GET' && url.pathname === '/api/config') return serveFile(res, path.join(ROOT, 'config.js'), 'private, no-store');
+  if (req.method === 'GET' && url.pathname === '/assets/images/favicon.svg') return serveFile(res, path.join(ROOT, 'assets', 'images', 'favicon.svg'), 'public, max-age=86400');
   if (req.method === 'GET' && url.pathname.startsWith('/media/')) {
     const parts = url.pathname.slice('/media/'.length).split('/');
     const folders = { image: 'images', video: 'videos', music: 'music' };

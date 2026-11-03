@@ -8,6 +8,9 @@
   },
   "routes": [
     { "src": "^/api/(.*)$", "dest": "/api/index.js?path=/api/$1" },
+    { "src": "^/style\\.css$", "dest": "/api/index.js?path=/style.css" },
+    { "src": "^/script\\.js$", "dest": "/api/index.js?path=/script.js" },
+    { "src": "^/assets/images/favicon\\.svg$", "dest": "/api/index.js?path=/assets/images/favicon.svg" },
     { "src": "^/media/image/(.*)$", "dest": "/api/index.js?path=/media/image/$1" },
     { "src": "^/media/video/(.*)$", "dest": "/api/index.js?path=/media/video/$1" },
     { "src": "^/media/music/(.*)$", "dest": "/api/index.js?path=/media/music/$1" },
